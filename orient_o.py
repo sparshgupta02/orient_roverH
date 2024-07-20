@@ -52,17 +52,18 @@ class orientation():
 			data_pts[i, 0] = pts[i, 0, 0]
 			data_pts[i, 1] = pts[i, 0, 1]
 		mean = np.empty((0))
-		mean, eigenvectors, eigenvalues = cv.PCACompute2(data_pts, mean)	#Sparsh will do this
-		cntr = (int(mean[0, 0]), int(mean[0, 1]))
+		mean, eigenvectors, eigenvalues = cv.PCACompute2(data_pts, mean)	#eigenvector correspoding to the highest eigenvalue is the orientation in PCA calculation
+		# PCA compute makes covariance matrix x* x(transpose) and gets its eigen values and eigen vecots 
+		cntr = (int(mean[0, 0]), int(mean[0, 1]))               # finds center of the object using mean of the data points 
 		cv.circle(img, cntr, 3, (255, 0, 255), 2)
-		p1 = (cntr[0] + 0.02 * eigenvectors[0, 0] * eigenvalues[0, 0], cntr[1] + 0.02 * eigenvectors[0, 1] * eigenvalues[0, 0])
-		p2 = (cntr[0] - 0.02 * eigenvectors[1, 0] * eigenvalues[1, 0], cntr[1] - 0.02 * eigenvectors[1, 1] * eigenvalues[1, 0])
-		self.drawAxis(img, cntr, p1, (0, 255, 0), 1)
-		self.drawAxis(img, cntr, p2, (255, 255, 0), 5)
+		p1 = (cntr[0] + 0.02 * eigenvectors[0, 0] * eigenvalues[0, 0], cntr[1] + 0.02 * eigenvectors[0, 1] * eigenvalues[0, 0])   # uses the largest eigenvalues corresponding eigenvector to get length
+		p2 = (cntr[0] - 0.02 * eigenvectors[1, 0] * eigenvalues[1, 0], cntr[1] - 0.02 * eigenvectors[1, 1] * eigenvalues[1, 0])  # uses the second largest eigenvalues corresponding eigenvector to get width	
+		self.drawAxis(img, cntr, p1, (0, 255, 0), 1)          # draws the required axes in lenght
+		self.drawAxis(img, cntr, p2, (255, 255, 0), 5)        # draws perpendicular axes in width 
 		angle = math.atan2(eigenvectors[0, 1], eigenvectors[0, 0])
 		return angle
 	    
-	def roll_controller(self):	#Sparsh will do this
+	def roll_controller(self):	
 		if not math.isnan(self.angle):
 			msg=Int32MultiArray()
 			msg.data=[0,0,0,0,0,0]
