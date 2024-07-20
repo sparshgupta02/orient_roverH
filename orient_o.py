@@ -64,9 +64,9 @@ class orientation():
 		return angle
 	    
 	def roll_controller(self):	
-		if not math.isnan(self.angle):
-			msg=Int32MultiArray()
-			msg.data=[0,0,0,0,0,0]
+		if not math.isnan(self.angle):   # nan means "not a number" , hence this if statement executes when angle is a number 
+			msg=Int32MultiArray() 
+			msg.data=[0,0,0,0,0,0]              # creates a new multi array and initialises data field with zeroes
 			msg.layout = MultiArrayLayout()
 			msg.layout.data_offset = 0
 			msg.layout.dim = [MultiArrayDimension()]
@@ -76,10 +76,10 @@ class orientation():
 			print("Angle:", self.angle)
 			if self.enc_angle < self.angle - 2:   # defining this as anticlockwise rotation
 				msg.data[5] = -255
-				print("roll angle:", self.enc_angle)
-			elif self.enc_angle > self.angle + 2:
+				print("roll angle:", self.enc_angle)        # print the current roll angle received from encoder 
+			elif self.enc_angle > self.angle + 2:                # if difference in current angle and instructed angle has a difference greater than 2
 				msg.data[5] = 255
-				print("roll angle:", self.enc_angle)
+				print("roll angle:", self.enc_angle)          # print the current roll angle received from encoder 
 				self.rate.sleep()
 			self.vel_pub.publish(msg)
 			gripper_pub = 3 #set this to actual gripper publishing value while testing
