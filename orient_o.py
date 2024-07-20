@@ -63,7 +63,7 @@ class orientation():
 		angle = math.atan2(eigenvectors[0, 1], eigenvectors[0, 0])
 		return angle
 	    
-	def roll_controller(self):	
+	def roll_controller(self):	         # controls how much to change roll on the arm
 		if not math.isnan(self.angle):   # nan means "not a number" , hence this if statement executes when angle is a number 
 			msg=Int32MultiArray() 
 			msg.data=[0,0,0,0,0,0]              # creates a new multi array and initialises data field with zeroes
