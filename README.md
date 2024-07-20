@@ -50,7 +50,8 @@ def drawAxis(self, img, p_, q_, colour, scale):		#to draw a lines along the desi
 		p[1] = q[1] + 9 * math.sin(angle - pi / 4)
 		cv.line(img, (int(p[0]), int(p[1])), (int(q[0]), int(q[1])), colour, 1, cv.LINE_AA)
 ```
-
+## getOrientation 
+This function gets the orientation of the object using PCA and returns angle between the eigen vectors of the covariance matrix 
 ## roll_controller
 
 ``` python
