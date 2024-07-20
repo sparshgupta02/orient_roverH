@@ -11,12 +11,12 @@ class orientation():
 	
 	def __init__(self):
 		self.vel_pub = rospy.Publisher("auto_arm_signals", Int32MultiArray, queue_size = 10)
-		self.om_pub = rospy.Publisher("om_bool", Bool, queue_size = 10)
+		self.goal_reached_pub = rospy.Publisher("om_bool", Bool, queue_size = 10)
 		self.enc=rospy.Subscriber("/enc_drive", Float32MultiArray, self.enc_callback)
 		self.fin=rospy.Subscriber("ik_over_ah", Bool, self.ik_callback)
 		self.angle = None
 		self.roll_constant =0   # change this according to whatever comes from rostopic of /enc_drive
-		self.om_pub.publish(False)
+		self.goal_reached_pub.publish(False)
 		self.ret = False
 		self.enc_angle = 0.0
 		self.ik_bool = False
@@ -87,7 +87,7 @@ class orientation():
 				msg.data[gripper_pub] = 255  #determine sign as per closing and opening
 				self.vel_pub.publish(msg)
 				rospy.sleep(5)
-				self.om_pub.publish(True)
+				self.goal_reached_pub.publish(True)
 	           
 	    	           
 
