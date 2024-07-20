@@ -51,7 +51,27 @@ def drawAxis(self, img, p_, q_, colour, scale):		#to draw a lines along the desi
 		cv.line(img, (int(p[0]), int(p[1])), (int(q[0]), int(q[1])), colour, 1, cv.LINE_AA)
 ```
 ## getOrientation 
-This function gets the orientation of the object using PCA and returns angle between the eigen vectors of the covariance matrix 
+This function gets the orientation of the object using PCA and returns the direction pointed of the eigenvector with the highest variance basically giving the direction of the length of object , it even makes a circle of radius 3 and thickness 2 around the circle with the center of object being the center of the circle 
+
+``` python
+def getOrientation(self, pts, img):		#to get the orientation of a contour
+		sz = len(pts)	#finding the number of points in the contour
+		data_pts = np.empty((sz, 2), dtype=np.float64)	#initializing a numpy array to store the coordinates of contour points
+		for i in range(data_pts.shape[0]):
+			data_pts[i, 0] = pts[i, 0, 0]
+			data_pts[i, 1] = pts[i, 0, 1]
+		mean = np.empty((0))
+		mean, eigenvectors, eigenvalues = cv.PCACompute2(data_pts, mean)	#eigenvector correspoding to the highest eigenvalue is the orientation in PCA calculation
+		# PCA compute makes covariance matrix x* x(transpose) and gets its eigen values and eigen vecots 
+		cntr = (int(mean[0, 0]), int(mean[0, 1]))               # finds center of the object using mean of the data points 
+		cv.circle(img, cntr, 3, (255, 0, 255), 2)
+		p1 = (cntr[0] + 0.02 * eigenvectors[0, 0] * eigenvalues[0, 0], cntr[1] + 0.02 * eigenvectors[0, 1] * eigenvalues[0, 0])   # uses the largest eigenvalues corresponding eigenvector to get length
+		p2 = (cntr[0] - 0.02 * eigenvectors[1, 0] * eigenvalues[1, 0], cntr[1] - 0.02 * eigenvectors[1, 1] * eigenvalues[1, 0])  # uses the second largest eigenvalues corresponding eigenvector to get width	
+		self.drawAxis(img, cntr, p1, (0, 255, 0), 1)          # draws the required axes in lenght
+		self.drawAxis(img, cntr, p2, (255, 255, 0), 5)        # draws perpendicular axes in width 
+		angle = math.atan2(eigenvectors[0, 1], eigenvectors[0, 0])
+		return angle
+```
 ## roll_controller
 
 ``` python
@@ -82,3 +102,11 @@ if not math.isnan(self.angle):
 ```
 
 ## Main function
+
+
+
+# Changes 
+- pranav_callback --> ik_callback
+- pranav_bool --> ik_bool
+- om_pub --> goal_reached_pub
+- 
