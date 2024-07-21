@@ -115,6 +115,45 @@ while True:
 		print("Error: Failed to capture frame.")
 		break
 ```
+Inside the while loop, we detect contours within a certain colour range and have decent area. We then get the orientation of the detected object and offset it
+
+```python
+	hsvFrame = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
+	lower = np.array([0, 70, 50], np.uint8)  #ask pranav which object is this used to detect
+	upper = np.array([10, 255, 255], np.uint8)
+
+	#This is for orange colour cone
+	#lower = np.array([0, 55, 228], np.uint8)
+	# upper = np.array([21, 255, 255], np.uint8)
+
+	mask = cv.inRange(hsvFrame, lower, upper)
+	red_output = cv.bitwise_and(frame, frame, mask=mask)
+	gray = cv.cvtColor(red_output, cv.COLOR_BGR2GRAY)
+	_, thresh = cv.threshold(gray, 10, 255, cv.THRESH_BINARY | cv.THRESH_OTSU)
+	contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+	angle_memory = None
+	if self.angle != None:
+		angle_memory = self.angle
+	for i, c in enumerate(contours):	# enumerate() gives us the index and value of an element in an array
+		area = cv.contourArea(c)           
+		if area < 1e4:
+			continue
+		else:
+			print(area)
+			cv.drawContours(frame, contours, i, (0, 255, 255), 4)
+			angle = self.getOrientation(c, frame)
+			
+			if self.a != 0 and angle != 0.0:
+				rospy.sleep(2)
+				self.angle = angle * 180/pi	#getting the angle in degrees
+				self.a = 0
+			if self.angle > 0:	#offsetting
+				self.angle = 90 - self.angle
+			elif self.angle < 0:
+				self.angle = -90 - self.angle
+			
+			self.ret = True
+```
 
 
 
