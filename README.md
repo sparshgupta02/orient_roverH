@@ -17,7 +17,7 @@ Initializes the script as a ROS node with name `go_to_goal`.
 - 
 
 
-# Functions used
+# Methods used
 
 ## ik_callback
 this function sets the ik_bool variables to true to falls based on which roll_controller will be called 
