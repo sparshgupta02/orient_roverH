@@ -20,18 +20,18 @@ Initializes the script as a ROS node with name `go_to_goal`.
 # Methods used
 
 ## ik_callback
-this function sets the `ik_bool` variable to true to falls based on which `roll_controller()` will be called 
+this method sets the `ik_bool` variable to true to falls based on which `roll_controller()` will be called 
 ``` python
 self.ik_bool = msg.data
 ```
 ## enc_callback
-this function is used to set the variable `enc_angle` to the roll data recieved from the encoder 
+this method is used to set the variable `enc_angle` to the roll data recieved from the encoder 
 ``` python
 self.enc_angle = msg.data[self.roll_constant]
 ```
 ## drawAxis
-this function takes center(cntr) of the object and end point of one the edges(p1 and p2) in the pca direction to draw axes on the image 
-in the code this function is used twice to get perpendiculars axes
+this method takes center(cntr) of the object and end point of one the edges(p1 and p2) in the pca direction to draw axes on the image 
+in the code this method is used twice to get perpendiculars axes
 
 ``` python
 
@@ -51,7 +51,7 @@ def drawAxis(self, img, p_, q_, colour, scale):		#to draw a lines along the desi
 		cv.line(img, (int(p[0]), int(p[1])), (int(q[0]), int(q[1])), colour, 1, cv.LINE_AA)
 ```
 ## getOrientation 
-This function gets the orientation of the object using PCA and returns the direction pointed of the eigenvector with the highest variance basically giving the direction of the length of object , it even makes a circle of radius 3 and thickness 2 around the circle with the center of object being the center of the circle 
+This method gets the orientation of the object using PCA and returns the direction pointed of the eigenvector with the highest variance basically giving the direction of the length of object , it even makes a circle of radius 3 and thickness 2 around the circle with the center of object being the center of the circle 
 
 ``` python
 def getOrientation(self, pts, img):		#to get the orientation of a contour
@@ -73,7 +73,7 @@ def getOrientation(self, pts, img):		#to get the orientation of a contour
 		return angle
 ```
 ## roll_controller
-
+This method starts the gripper motion and moves it according to the orientation data of the detected object we get from the video feed
 ``` python
 if not math.isnan(self.angle):
 			msg=Int32MultiArray()
