@@ -105,16 +105,18 @@ if not math.isnan(self.angle):
 First captures video feed 
 
 ``` python
-		cap = cv.VideoCapture(3)	#capturing video from the camera
-		if not cap.isOpened():
-			print("Error: Failed to open camera.")
-			exit()
-		while True:
-			ret, frame = cap.read()
-			if not ret:
-				print("Error: Failed to capture frame.")
-				break
+cap = cv.VideoCapture(3)	#capturing video from the camera
+if not cap.isOpened():
+	print("Error: Failed to open camera.")
+	exit()
+while True:
+	ret, frame = cap.read()
+	if not ret:
+		print("Error: Failed to capture frame.")
+		break
 ```
+
+
 
 
 
