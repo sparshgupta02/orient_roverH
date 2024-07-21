@@ -9,12 +9,15 @@ Initializes the script as a ROS node with name `go_to_goal`.
 - Subscribes to data on the topic `ik_over_ah` (this basically gets data to execute roll_controller or not)
 
 ## Publisher
-- Publishes to topic `auto_arm_signals`
-- Publishes to topic `om_bool`
+- Publishes to topic `auto_arm_signals` of type Int32MultiArray
+- Publishes to topic `goal_reached_pub` of Bool type
 
 ## Variables used
-- bashbsljbfhjb
-- 
+- `ik_bool` , `ret` : Boolean to check whether we detected the desired object
+-  `enc_angle` : Sprucey pleaj helpey
+-  Oi explain variables used in getOrientation and roll controller
+-  `angle_memory`: stores the initial orientation of the object
+-  `small_res` : resized image
 
 
 # Methods used
