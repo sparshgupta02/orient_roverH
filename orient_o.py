@@ -117,7 +117,7 @@ class orientation():
 			red_output = cv.bitwise_and(frame, frame, mask=mask)
 			gray = cv.cvtColor(red_output, cv.COLOR_BGR2GRAY)
 			_, thresh = cv.threshold(gray, 10, 255, cv.THRESH_BINARY | cv.THRESH_OTSU)
-			contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+			contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)	#finding contours based on the threshold
 			angle_memory = None
 			if self.angle != None:
 				angle_memory = self.angle
