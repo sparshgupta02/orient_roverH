@@ -155,10 +155,40 @@ Inside the while loop, we detect contours within a certain colour range and have
 			self.ret = True
 ```
 
+Naggi maalum spruce ji
 
+```python
+	if angle_memory != None and self.angle != None:	
+		if angle_memory + self.angle <= 91 and angle_memory + self.angle >= 89:
+			if angle_memory < self.angle:
+				self.angle = angle_memory
+		elif angle_memory + self.angle >=-91 and angle_memory + self.angle <= -89:
+			if angle_memory < self.angle:
+				self.angle = angle_memory
+		else:
+			self.angle = angle_memory
+```
 
+After capturing the object, we call the roll_controller() method to activate gripper motion
 
+```python
+	if self.ret == True and self.ik_bool == True:
+		self.roll_controller()
+```
+Resizing the image and outputting it
+```python
+	small_res = cv.resize(frame, (640, 480))	#resizing the image and printing it
+	cv.imshow('contours', small_res)
+	if cv.waitKey(1) & 0xFF == ord('q'):
+		break
+```
 
+Finally killing the video feed
+
+```python
+cap.release()	#closing video feed
+cv.destroyAllWindows()
+```
 # Changes 
 - pranav_callback --> ik_callback
 - pranav_bool --> ik_bool
