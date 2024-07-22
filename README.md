@@ -4,6 +4,9 @@ this is repository to explain orient_o file
 # Initialisation 
 Initializes the script as a ROS node with name `go_to_goal`.
 
+
+![Alt Text](flowchart_orient.jpg)
+
 ## Subscribers
 - Subscribes to encoder readings on the topic `/enc_drive` (gets encoder data from motor)
 - Subscribes to data on the topic `ik_over_ah` (this basically gets data to execute roll_controller or not)
