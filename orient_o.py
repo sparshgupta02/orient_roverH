@@ -15,6 +15,7 @@ class orientation():
 		self.enc=rospy.Subscriber("/enc_drive", Float32MultiArray, self.enc_callback)
 		self.fin=rospy.Subscriber("ik_over_ah", Bool, self.ik_callback)
 		self.angle = None
+		self.angle_temp =None
 		self.roll_constant =0   # change this according to whatever comes from rostopic of /enc_drive
 		self.goal_reached_pub.publish(False)
 		self.ret = False
