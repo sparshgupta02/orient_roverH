@@ -24,7 +24,6 @@ Initializes the script as a ROS node with name `go_to_goal`.
 -  `angle_temp` keeps the angle used in draw axis function
 -  `self.a` is variable used so that conversion from radian to degree is only done once
 -  `roll_constant` gets data from encoder 
--  
 
 
 # Methods used
