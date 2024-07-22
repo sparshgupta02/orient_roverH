@@ -14,10 +14,10 @@ Initializes the script as a ROS node with name `go_to_goal`.
 
 ## Variables used
 - `ik_bool` , `ret` : Boolean to check whether we detected the desired object
--  `enc_angle` : Sprucey pleaj helpey
--  Oi explain variables used in getOrientation and roll controller
+-  `enc_angle` : variable that stores the angle received from encoder data 
 -  `angle_memory`: stores the initial orientation of the object
 -  `small_res` : resized image
+-  
 
 
 # Methods used
@@ -158,7 +158,10 @@ Inside the while loop, we detect contours within a certain colour range and have
 			self.ret = True
 ```
 
-Naggi maalum spruce ji
+In the above code we convert the data to degree only once using self.a temporary variable, then its offsetted(to change the reference frame).
+
+in the code below is memory angle and angle sum to 90 degrees, then self angle is kept to the lower of the 2 values, if it doesnt sum to 90 then just set self.angle to angle memory and continue forward
+
 
 ```python
 	if angle_memory != None and self.angle != None:	
