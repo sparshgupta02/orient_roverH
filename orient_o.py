@@ -33,16 +33,16 @@ class orientation():
 	def drawAxis(self, img, p_, q_, colour, scale):		#to draw a lines along the desired object
 		p = list(p_)
 		q = list(q_)
-		angle = math.atan2(p[1] - q[1], p[0] - q[0])
+		angle_temp = math.atan2(p[1] - q[1], p[0] - q[0])
 		hypotenuse = math.sqrt((p[1] - q[1]) ** 2 + (p[0] - q[0]) ** 2)
-		q[0] = p[0] - scale * hypotenuse * math.cos(angle)
-		q[1] = p[1] - scale * hypotenuse * math.sin(angle)
+		q[0] = p[0] - scale * hypotenuse * math.cos(angle_temp)
+		q[1] = p[1] - scale * hypotenuse * math.sin(angle_temp)
 		cv.line(img, (int(p[0]), int(p[1])), (int(q[0]), int(q[1])), colour, 1, cv.LINE_AA)
-		p[0] = q[0] + 9 * math.cos(angle + pi / 4)
-		p[1] = q[1] + 9 * math.sin(angle + pi / 4)
+		p[0] = q[0] + 9 * math.cos(angle_temp + pi / 4)
+		p[1] = q[1] + 9 * math.sin(angle_temp + pi / 4)
 		cv.line(img, (int(p[0]), int(p[1])), (int(q[0]), int(q[1])), colour, 1, cv.LINE_AA)
-		p[0] = q[0] + 9 * math.cos(angle - pi / 4)
-		p[1] = q[1] + 9 * math.sin(angle - pi / 4)
+		p[0] = q[0] + 9 * math.cos(angle_temp - pi / 4)
+		p[1] = q[1] + 9 * math.sin(angle_temp - pi / 4)
 		cv.line(img, (int(p[0]), int(p[1])), (int(q[0]), int(q[1])), colour, 1, cv.LINE_AA)
 
 	def getOrientation(self, pts, img):		#to get the orientation of a contour
