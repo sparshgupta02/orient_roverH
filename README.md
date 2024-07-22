@@ -20,6 +20,10 @@ Initializes the script as a ROS node with name `go_to_goal`.
 -  `enc_angle` : variable that stores the angle received from encoder data 
 -  `angle_memory`: stores the initial orientation of the object
 -  `small_res` : resized image
+-  `angle` keeps the orientation of the object
+-  `angle_temp` keeps the angle used in draw axis function
+-  `self.a` is variable used so that conversion from radian to degree is only done once
+-  `roll_constant` gets data from encoder 
 -  
 
 
