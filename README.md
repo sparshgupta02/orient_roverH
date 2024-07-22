@@ -196,4 +196,4 @@ cv.destroyAllWindows()
 - `pranav_callback` --> `ik_callback`
 - `pranav_bool` --> `ik_bool`
 - `om_pub` --> `goal_reached_pub`
-- 
+- angle in drawAxis renamed to angle_temp to avoid confusion with angle in get orientation which is used in main function 
