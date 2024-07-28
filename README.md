@@ -128,7 +128,7 @@ Inside the while loop, we detect contours within a certain colour range and have
 
 ```python
 	hsvFrame = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-	lower = np.array([0, 70, 50], np.uint8)  #ask pranav which object is this used to detect
+	lower = np.array([0, 70, 50], np.uint8)  #RED OBJECT
 	upper = np.array([10, 255, 255], np.uint8)
 
 	#This is for orange colour cone
